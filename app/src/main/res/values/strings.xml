@@ -1,0 +1,14 @@
+<resources>
+	<string name="app_name">FeedBackApp</string>
+	<string name="main_screen_message">Добро пожаловать!\nВыберите экран для загрузки</string>
+	<string name="customer_screen">Экран клиента</string>
+	<string name="manager_screen">Экран менеджера</string>
+	<string name="title">Ваше мнение важно для нас! \nОставьте свой отзыв о наших продуктах</string>
+	<string name="grade_title">Насколько бы вы рекомендовали компанию MMM?</string>
+	<string name="comment_title">Какова причина для такой оценки?</string>
+	<string name="submit">Отправить</string>
+	<string name="feedback_saved_text">Ваш отзыв сохранен. Спасибо!</string>
+	<string name="no_recommend">Не буду рекомендовать</string>
+	<string name="neutral">Нейтрально</string>
+	<string name="surely_recommend">Обязательно буду рекомендовать</string>
+</resources>

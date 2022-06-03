@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         if (supportFragmentManager.backStackEntryCount != 0) {
-            supportFragmentManager.beginTransaction().replace(R.id.container_view, CustomerFragment()).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.container_view, CustomerFragment()).addToBackStack(null).commit()
         } else {
             supportFragmentManager.beginTransaction().replace(R.id.container_view, StartFragment()).commit()
         }

@@ -11,4 +11,8 @@
 	<string name="no_recommend">Не буду рекомендовать</string>
 	<string name="neutral">Нейтрально</string>
 	<string name="surely_recommend">Обязательно буду рекомендовать</string>
+	<string name="feedback_statistics">Статистика отзывов</string>
+	<string name="critics">Критики</string>
+	<string name="promotes">Промоутеры</string>
+	<string name="neutrals">Нейтралы</string>
 </resources>

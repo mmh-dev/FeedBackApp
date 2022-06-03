@@ -1,6 +1,7 @@
 package com.mmh.feedbackapp
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mmh.feedbackapp.adapters.FeedBackAdapter
 import com.mmh.feedbackapp.databinding.FragmentManagerBinding
 import com.mmh.feedbackapp.db.AppDatabase
+import com.mmh.feedbackapp.entities.FeedBack
 import com.mmh.feedbackapp.utils.CRITIC
 import com.mmh.feedbackapp.utils.NEUTRAL
 import com.mmh.feedbackapp.utils.PROMOTER
@@ -27,6 +29,7 @@ class ManagerFragment : Fragment() {
     }
     private var feedBackAdapter: FeedBackAdapter? = null
     private var checkedType = CRITIC
+    private var feedbackList = mutableListOf<FeedBack>()
 
     @Inject
     lateinit var db: AppDatabase
@@ -54,12 +57,13 @@ class ManagerFragment : Fragment() {
                 binding.promoterBtn.id -> PROMOTER
                 else -> ""
             }
+            Log.i("tag", checkedType)
+            feedbackList.filter { it.type == checkedType }
+            feedBackAdapter?.submitList(feedbackList)
         }
 
         lifecycleScope.launch(Dispatchers.IO) {
-            val feedbackList = db.dao().getAllFeedbacks()
-            feedbackList.filter { it.type == checkedType }
-            feedBackAdapter?.submitList(feedbackList)
+            feedbackList = db.dao().getAllFeedbacks()
         }
     }
 }

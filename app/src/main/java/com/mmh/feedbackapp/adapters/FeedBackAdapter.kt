@@ -20,7 +20,8 @@ class FeedBackAdapter @Inject constructor(private val context: Context) :
 
         fun bind(feedBack: FeedBack) {
             with(binding) {
-                comment.text = feedBack.comment
+                comment.text = context.resources.getString(R.string.comment_text, feedBack.comment)
+                score.text = context.resources.getString(R.string.score_text, feedBack.score)
                 when (feedBack.type) {
                     CRITIC -> comment.setTextColor(context.resources.getColor(R.color.red))
                     PROMOTER -> comment.setTextColor(context.resources.getColor(R.color.green))

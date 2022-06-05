@@ -6,20 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.mmh.feedbackapp.adapters.FeedBackAdapter
 import com.mmh.feedbackapp.databinding.FragmentManagerBinding
-import com.mmh.feedbackapp.db.AppDatabase
 import com.mmh.feedbackapp.entities.FeedBack
+import com.mmh.feedbackapp.utils.ALL
 import com.mmh.feedbackapp.utils.CRITIC
 import com.mmh.feedbackapp.utils.NEUTRAL
 import com.mmh.feedbackapp.utils.PROMOTER
+import com.mmh.feedbackapp.viewModels.MyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import javax.inject.Inject
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class ManagerFragment : Fragment() {
@@ -28,11 +28,8 @@ class ManagerFragment : Fragment() {
         FragmentManagerBinding.inflate(layoutInflater)
     }
     private var feedBackAdapter: FeedBackAdapter? = null
-    private var checkedType = CRITIC
-    private var feedbackList = mutableListOf<FeedBack>()
-
-    @Inject
-    lateinit var db: AppDatabase
+    private var feedbackList = listOf<FeedBack>()
+    private val viewModel: MyViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,24 +43,43 @@ class ManagerFragment : Fragment() {
 
         feedBackAdapter = FeedBackAdapter(requireContext())
         binding.commentsRv.apply {
-            layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(requireActivity())
             adapter = feedBackAdapter
         }
 
-        binding.toggleGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
-            checkedType = when (checkedId) {
+        viewModel.getFeedbacks()
+        binding.toggleGroup.setOnCheckedChangeListener { radioGroup, checkedId ->
+            val checkedType = when (checkedId) {
                 binding.criticsBtn.id -> CRITIC
                 binding.neutralsBtn.id -> NEUTRAL
                 binding.promoterBtn.id -> PROMOTER
-                else -> ""
+                else -> ALL
             }
             Log.i("tag", checkedType)
-            feedbackList.filter { it.type == checkedType }
-            feedBackAdapter?.submitList(feedbackList)
+            if (checkedType != ALL) {
+                val filteredList = feedbackList.filter { it.type == checkedType }
+                feedBackAdapter?.submitList(filteredList)
+            } else {
+                feedBackAdapter?.submitList(feedbackList)
+            }
         }
+        lifecycleScope.launchWhenCreated {
+            viewModel.feedBackList.observe(viewLifecycleOwner) { list ->
+                feedbackList = list
+                feedBackAdapter?.submitList(feedbackList)
+            }
+            updateNumbers()
+        }
+    }
 
-        lifecycleScope.launch(Dispatchers.IO) {
-            feedbackList = db.dao().getAllFeedbacks()
+    private fun updateNumbers() {
+        binding.apply {
+            viewModel.numbers.observe(viewLifecycleOwner) { numbers ->
+                criticsNumber.text = numbers.first()
+                neutralsNumber.text = numbers[1]
+                promotersNumber.text = numbers[2]
+                averageScore.text = numbers.last()
+            }
         }
     }
 }

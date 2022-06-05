@@ -29,7 +29,6 @@ class StartFragment : Fragment() {
             customerBtn.setOnClickListener {
                 parentFragmentManager.beginTransaction().replace(R.id.container_view, CustomerFragment()).addToBackStack(null).commit()
             }
-
             managerBtn.setOnClickListener {
                 parentFragmentManager.beginTransaction().replace(R.id.container_view, ManagerFragment()).addToBackStack(null).commit()
             }

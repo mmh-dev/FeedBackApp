@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.mmh.feedbackapp.databinding.FragmentCustomerBinding
 import com.mmh.feedbackapp.db.AppDatabase
@@ -14,6 +15,7 @@ import com.mmh.feedbackapp.utils.CRITIC
 import com.mmh.feedbackapp.utils.NEUTRAL
 import com.mmh.feedbackapp.utils.PROMOTER
 import com.mmh.feedbackapp.utils.showToast
+import com.mmh.feedbackapp.viewModels.MyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,11 +28,8 @@ class CustomerFragment : Fragment() {
     private val binding: FragmentCustomerBinding by lazy {
         FragmentCustomerBinding.inflate(layoutInflater)
     }
-
+    private val viewModel: MyViewModel by viewModels()
     private var score: Int = 0
-
-    @Inject
-    lateinit var db: AppDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +49,8 @@ class CustomerFragment : Fragment() {
             }
 
             submitBtn.setOnClickListener {
-                lifecycleScope.launch (Dispatchers.IO) {
+
+                lifecycleScope.launch {
                     val comment = commentField.text.toString()
                     val feedBack = FeedBack(score, comment)
                     when (score) {
@@ -58,7 +58,7 @@ class CustomerFragment : Fragment() {
                         in 7..8 -> feedBack.type = NEUTRAL
                         else -> feedBack.type = PROMOTER
                     }
-                    db.dao().insertFeedback(feedBack)
+                    viewModel.insertFeedback(feedBack)
                     withContext(Dispatchers.Main) {
                         showToast(getString(R.string.feedback_saved_text))
                         binding.apply {

@@ -29,61 +29,147 @@
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-	<com.google.android.material.button.MaterialButtonToggleGroup
+	<RadioGroup
 		android:id="@+id/toggleGroup"
+		android:orientation="horizontal"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_marginStart="16dp"
+		android:layout_marginEnd="16dp"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintHorizontal_bias="0.5"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/imageView6"
-		app:singleSelection="true">
+		app:layout_constraintTop_toBottomOf="@+id/imageView6">
 
-		<Button
+		<RadioButton
 			android:id="@+id/critics_btn"
-			style="@style/Widget.MaterialComponents.Button.OutlinedButton"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="@string/critics" />
 
-		<Button
+		<RadioButton
 			android:id="@+id/neutrals_btn"
-			style="@style/Widget.MaterialComponents.Button.OutlinedButton"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="@string/neutrals" />
 
-		<Button
+		<RadioButton
 			android:id="@+id/promoter_btn"
-			style="@style/Widget.MaterialComponents.Button.OutlinedButton"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="@string/promotes" />
-	</com.google.android.material.button.MaterialButtonToggleGroup>
+			android:text="@string/promoters" />
+
+		<RadioButton
+			android:id="@+id/all_btn"
+			android:checked="true"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/all" />
+
+	</RadioGroup>
 
 	<TextView
 		android:id="@+id/textView14"
+		style="@style/TitleText"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_marginStart="16dp"
+		android:layout_marginTop="8dp"
 		android:text="@string/critics"
-		app:layout_constraintStart_toStartOf="@+id/toggleGroup"
+		android:textColor="@color/red"
+		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/toggleGroup" />
 
 	<TextView
 		android:id="@+id/textView15"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="  - "
+		android:text=" - "
+		style="@style/TitleText"
+		android:textColor="@color/red"
 		app:layout_constraintBottom_toBottomOf="@+id/textView14"
 		app:layout_constraintStart_toEndOf="@+id/textView14" />
 
 	<TextView
-		android:id="@+id/textView16"
+		android:id="@+id/critics_number"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="TextView"
+		style="@style/TitleText"
+		android:text="0"
+		android:textColor="@color/red"
 		app:layout_constraintBottom_toBottomOf="@+id/textView14"
 		app:layout_constraintStart_toEndOf="@+id/textView15" />
+
+	<TextView
+		android:id="@+id/textView19"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="16dp"
+		android:layout_marginTop="8dp"
+		android:text="@string/neutrals"
+		style="@style/TitleText"
+		android:textColor="@android:color/darker_gray"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+	<TextView
+		android:id="@+id/textView18"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text=" - "
+		style="@style/TitleText"
+		android:textColor="@android:color/darker_gray"
+		app:layout_constraintBottom_toBottomOf="@+id/textView19"
+		app:layout_constraintStart_toEndOf="@+id/textView19" />
+
+	<TextView
+		android:id="@+id/neutrals_number"
+		style="@style/TitleText"
+		android:text="0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="@android:color/darker_gray"
+		app:layout_constraintBottom_toBottomOf="@+id/textView19"
+		app:layout_constraintStart_toEndOf="@+id/textView18" />
+
+	<TextView
+		android:id="@+id/textView20"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="16dp"
+		android:layout_marginTop="8dp"
+		android:text="@string/promoters"
+		style="@style/TitleText"
+		android:textColor="@color/green"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+	<TextView
+		android:id="@+id/textView21"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text=" - "
+		style="@style/TitleText"
+		android:textColor="@color/green"
+		app:layout_constraintBottom_toBottomOf="@+id/textView20"
+		app:layout_constraintStart_toEndOf="@+id/textView20" />
+
+	<TextView
+		android:id="@+id/promoters_number"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		style="@style/TitleText"
+		android:text="0"
+		android:textColor="@color/green"
+		app:layout_constraintBottom_toBottomOf="@+id/textView20"
+		app:layout_constraintStart_toEndOf="@+id/textView21" />
+
+	<androidx.constraintlayout.widget.Guideline
+		android:id="@+id/guideline2"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		app:layout_constraintGuide_begin="194dp" />
 
 	<androidx.recyclerview.widget.RecyclerView
 		android:id="@+id/comments_rv"
@@ -93,8 +179,36 @@
 		android:layout_marginTop="8dp"
 		android:layout_marginEnd="16dp"
 		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintHorizontal_bias="0.5"
+		app:layout_constraintStart_toStartOf="@+id/guideline2"
+		app:layout_constraintTop_toBottomOf="@+id/toggleGroup" />
+
+	<TextView
+		android:id="@+id/textView22"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="16dp"
+		android:layout_marginTop="8dp"
+		style="@style/TitleText"
+		android:text="@string/average_score"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/textView14" />
+		app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+	<TextView
+		android:id="@+id/textView23"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text=" - "
+		style="@style/TitleText"
+		app:layout_constraintBottom_toBottomOf="@+id/textView22"
+		app:layout_constraintStart_toEndOf="@+id/textView22" />
+
+	<TextView
+		android:id="@+id/average_score"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		style="@style/TitleText"
+		android:text="0"
+		app:layout_constraintBottom_toBottomOf="@+id/textView22"
+		app:layout_constraintStart_toEndOf="@+id/textView23" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

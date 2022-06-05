@@ -13,6 +13,10 @@
 	<string name="surely_recommend">Обязательно буду рекомендовать</string>
 	<string name="feedback_statistics">Статистика отзывов</string>
 	<string name="critics">Критики</string>
-	<string name="promotes">Промоутеры</string>
+	<string name="promoters">Промоутеры</string>
 	<string name="neutrals">Нейтралы</string>
+	<string name="comment_text">\"%1$s\"</string>
+	<string name="score_text">Оценка: %1$d</string>
+	<string name="average_score">Средняя оценка</string>
+	<string name="all">Все</string>
 </resources>
